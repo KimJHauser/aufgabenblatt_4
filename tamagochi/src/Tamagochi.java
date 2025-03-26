@@ -5,6 +5,7 @@ public class Tamagochi {
     private int langeweile = 0;
     private int muedigkeit = 0;
     private int punktestand = 0;
+
     private void tick() {
         hunger = hunger + 1;
         langeweile++; //Geht nur für +1 oder -- für -1
@@ -108,7 +109,6 @@ public class Tamagochi {
 
 
     }
-
 
 
 }
