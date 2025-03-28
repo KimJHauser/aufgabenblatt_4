@@ -18,7 +18,17 @@ public class Zug {
         }
 
     }
+    public Wagen erstenWagenEntfernen(){
+        if (lok.getErsterWagen() == null) {
+            return null;
+        }
+        Wagen ersterWagen =lok.getErsterWagen();
+        lok.setErsterWagen(ersterWagen.getNaechsterWagen());//erster Wagen aus Kette entfernen
+        ersterWagen.setNaechsterWagen(null);//entfernter Wagen hat keinen nächsten Wagen
+        return ersterWagen;
+    }
 
+    
 
 
     public int getWagenAnzahl(){
@@ -31,11 +41,26 @@ public class Zug {
         return wagencounter;
     }
 
+
     public int getKapazitaet(){
-        int passagierkapazität = 0;
-        Wagen aktuellerWagen = lok.getPersonenanzahl();
-        
+        int gesamtkapazitaet = 0;
+        Wagen aktuellerWagen = lok.getErsterWagen();
+        while (aktuellerWagen != null){
+            gesamtkapazitaet += aktuellerWagen.getPersonenanzahl();
+            aktuellerWagen = aktuellerWagen.getNaechsterWagen();
+        }
+        return gesamtkapazitaet;
     }
 
+    public int getLaenge(){
+        int gesamtLaenge = 0;
+        Wagen aktuellerWagen = lok.getErsterWagen();
+        gesamtLaenge = gesamtLaenge+lok.getLaenge();
+        while (aktuellerWagen != null){
+            gesamtLaenge += aktuellerWagen.getLaenge();
+            aktuellerWagen = aktuellerWagen.getNaechsterWagen();
+        }
+        return gesamtLaenge;
+    }
 
 }
