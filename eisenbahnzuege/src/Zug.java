@@ -28,7 +28,16 @@ public class Zug {
         return ersterWagen;
     }
 
-    
+    public void zugAnhaengen(Zug andererZug){
+        Wagen letzterWagen = this.L ;
+        if(letzterWagen == null){
+
+
+
+        }
+
+    }
+
 
 
     public int getWagenAnzahl(){
@@ -61,6 +70,24 @@ public class Zug {
             aktuellerWagen = aktuellerWagen.getNaechsterWagen();
         }
         return gesamtLaenge;
+    }
+
+    public void info(){
+        System.out.println("Zuginfo:");
+        System.out.println("Anzahl der Wagen: " + getWagenAnzahl() + " Wagen");
+        System.out.println("Gesamtlänge: " + getLaenge()  + " Meter");
+        System.out.println("Passagierkapazität: " + getKapazitaet()  + " Personen");
+        System.out.println("Der Zug besteht aus folgenden Einzelteilen:");
+        System.out.println("Lokomotivenlänge: " + lok.getLaenge() + " Meter");
+        System.out.println("Lokomotivenpassagierkapazität: " + lok.getPersonenanzahl() + " Personen");
+        Wagen aktuellerWagen = lok.getErsterWagen();
+        int wagennummer = 1;
+        while (aktuellerWagen != null){
+            System.out.println("Wagen: " + (wagennummer++) + " Länge: " + aktuellerWagen.getLaenge()
+                    + " Personenkapazität: " + aktuellerWagen.getPersonenanzahl() );
+            aktuellerWagen = aktuellerWagen.getNaechsterWagen();
+        }
+
     }
 
 }
