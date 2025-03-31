@@ -19,25 +19,44 @@ public class Zug {
 
     }
     public Wagen erstenWagenEntfernen(){
-        if (lok.getErsterWagen() == null) {
+
+        Wagen ersterWagen = getErsterWagen();
+        if(ersterWagen == null){
             return null;
         }
-        Wagen ersterWagen =lok.getErsterWagen();
         lok.setErsterWagen(ersterWagen.getNaechsterWagen());//erster Wagen aus Kette entfernen
         ersterWagen.setNaechsterWagen(null);//entfernter Wagen hat keinen nächsten Wagen
         return ersterWagen;
     }
 
-    public void zugAnhaengen(Zug andererZug){
-        Wagen letzterWagen = this.L ;
-        if(letzterWagen == null){
-
-
-
+    private Wagen getLetzterWagen(){
+        if(lok.getErsterWagen() == null){
+            return null;
         }
-
+        Wagen aktuellerWagen = lok.getErsterWagen();
+        while(aktuellerWagen.getNaechsterWagen() != null){
+            aktuellerWagen = aktuellerWagen.getNaechsterWagen();
+        }
+        return aktuellerWagen;
     }
 
+   public void zugAnhaengen(Zug andererZug){
+        Wagen letzterWagen = getLetzterWagen();
+
+        if(letzterWagen != null){
+            letzterWagen.setNaechsterWagen(andererZug.getErsterWagen());
+        }
+        else{
+            lok.setErsterWagen(andererZug.getErsterWagen());
+        }
+       andererZug.lok.setErsterWagen(null);
+    }
+
+    public Wagen getErsterWagen(){
+
+        Wagen ersterWagen =lok.getErsterWagen();
+        return ersterWagen;
+    }
 
 
     public int getWagenAnzahl(){
@@ -87,7 +106,7 @@ public class Zug {
                     + " Personenkapazität: " + aktuellerWagen.getPersonenanzahl() );
             aktuellerWagen = aktuellerWagen.getNaechsterWagen();
         }
-
+        System.out.println("--------------------------------------------------");
     }
 
 }
